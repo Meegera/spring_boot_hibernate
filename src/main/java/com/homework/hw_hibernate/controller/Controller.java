@@ -18,16 +18,16 @@ public class Controller {
 
     @GetMapping("/by-city")
     public List<Person> getByCity(@RequestParam("city") String city){
-        return repository.findByCityOfLiving(city);
+        return repository.findByCityOfLivingJPQL(city);
     }
 
     @GetMapping("/by-name-surname")
     public Optional<Person> getByNameAndSurname(@RequestParam("name") String name, @RequestParam("surname") String surname){
-        return repository.findByUserInfoNameAndUserInfoSurname(name, surname);
+        return repository.findByUserInfoNameAndUserInfoSurnameJPQL(name, surname);
     }
     @GetMapping("/by-age")
     public List<Person> getByAge(@RequestParam("age") int age){
-        return repository.findByUserInfoAgeLessThan(age);
+        return repository.findByUserInfoAgeLessThanJPQL(age);
     }
     @GetMapping("/")
     public List<Person> getAll(){
