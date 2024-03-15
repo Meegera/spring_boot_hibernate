@@ -1,25 +1,17 @@
 package com.homework.hw_hibernate.repository;
 
 import com.homework.hw_hibernate.entity.Person;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @org.springframework.stereotype.Repository
-public class Repository {
+public interface Repository extends JpaRepository<Person, Long> {
 
-    final String select = "from Person ";
+     List<Person> findByCityOfLiving(String city);
 
-    @PersistenceContext
-    private EntityManager entityManager;
+     List<Person> findByUserInfoAgeLessThan(int age);
 
-    public List<Person> getPersonsByCity(String city){
-        List<Person> persons = entityManager.createQuery(select, Person.class).getResultList();
-        return persons.stream()
-                .filter(x -> x.getCityOfLiving().toLowerCase().equals(city.toLowerCase()))
-                .collect(Collectors.toList());
-    }
+    Optional<Person> findByUserInfoNameAndUserInfoSurname(String name, String surname);
 }
