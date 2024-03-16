@@ -29,7 +29,7 @@ public class Controller {
     public List<Person> getByAge(@RequestParam("age") int age){
         return repository.findByUserInfoAgeLessThan(age);
     }
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<Person> getAll(){
         return repository.findAll();
     }
