@@ -19,10 +19,10 @@ public class SecurityConfiguration{
              http
                 .formLogin(withDefaults())
                 .authorizeRequests().requestMatchers("/persons/all").permitAll()
-                .and()
-                .authorizeRequests().requestMatchers("/persons/by-name-surname", "/persons/by-city", "/persons/by-age").hasAuthority("read")
-                .and()
-                .authorizeRequests().requestMatchers("/persons/save", "/persons/delete").hasAuthority("write")
+//                .and()
+//                .authorizeRequests().requestMatchers("/persons/by-name-surname").hasAuthority("read")
+//                .and()
+//                .authorizeRequests().requestMatchers("/persons/save", "/persons/delete").hasAuthority("write")
                 .anyRequest().authenticated();
 
         return http.build();
@@ -34,12 +34,14 @@ public class SecurityConfiguration{
                 .username("user1")
                 .password("password1")
                 .authorities("read")
+                .roles("READ", "WRITE", "DELETE")
                 .build();
 
         UserDetails user2 = User.withDefaultPasswordEncoder()
                 .username("user2")
                 .password("password2")
                 .authorities("read", "write")
+                .roles("READ")
                 .build();
 
         return new InMemoryUserDetailsManager(user1, user2);
